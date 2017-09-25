@@ -49,11 +49,11 @@ function processMessage(message) {
 		// Get last tree of the user (if any)
 		var userBranch = getUserBranch(message.author);
 		if (userBranch) {
-			var deepestBranchFromUserBranch = processTree(getNextUserTree(userBranch), words);
+			var deepestBranchFromUserBranch = processTree(getNextUserTree(userBranch), words, true);
 			if (deepestBranchFromUserBranch == null) {
+				if (!userBranch.keepOnReplyFail) deleteUserBranch(message.author);
 				if(userBranch.replyOnFailedNext) {
 					randomReply(message, userBranch.replyOnFailedNext, userBranch.replyOptions);
-					deleteUserBranch(message.author);
 					return;
 				}
 			} else {
@@ -62,7 +62,7 @@ function processMessage(message) {
 			}
 		}
 
-		var deepestBranch = processTree(_decisionTree, words);
+		var deepestBranch = processTree(_decisionTree, words, true);
 		if (deepestBranch) endWithBranch(message, deepestBranch);
 	} catch(e) {
 		console.error(e);
@@ -76,11 +76,12 @@ function endWithBranch(message, branch) {
 }
 
 // Returns deepest matched branch starting from baseTree
-function processTree(baseTree, words) {
+function processTree(baseTree, words, isFirst) {
 	if (!baseTree) return null;
 	for(var i = 0; i<baseTree.length; i++) {
+		if (baseTree[i].onlyAsReply && !isFirst) continue;
 		if(match_triggers(baseTree[i].triggers, words)){
-			var deepestBranch = processTree(baseTree[i].next, words);
+			var deepestBranch = processTree(baseTree[i].next, words, false);
 			if (deepestBranch == null) return baseTree[i];
 			else return deepestBranch;
 		}
