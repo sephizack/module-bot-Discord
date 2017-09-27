@@ -45,10 +45,10 @@ var okModuleTree = [{
     },*/{
         triggers:[['slap']], replyData : ["Non moi je slap rien du tout !"], stopDiscussionOnMatch:true
     },{
-        triggers:[['tu', 'sers', 'rien'],['tu', 'nul'], ['t', 'nul'], ['tu', 'pue'], ['tu', 'useless'], ['t', 'useless']], 
-        replyData : ["mon code est open source, hésites pas a m'améliorer. https://github.com/davidbisegna/module-bot-Discord"], replyOptions:{embed:denis}, stopDiscussionOnMatch:true
+        triggers:[['tu', 'sers', 'rien'],['tu', 'nul'], ['t', 'nul'], ['tu', 'pue'], ['tu', 'useless'], ['t', 'useless'], ['va', 'mourir']], 
+        replyData : ["mon code est open source, hésites pas à m'améliorer. https://github.com/davidbisegna/module-bot-Discord"], stopDiscussionOnMatch:true
     },{
-        onlyAsReply:true, triggers:[['rien'], ['que', 'dalle'], ['est', 'bon', 'en', 'fait'], ['laisse', 'tomber']], replyData : ["OKER"]
+        onlyAsReply:true, triggers:[['rien'], ['que', 'dalle'], ['est', 'bon', 'en', 'fait'], ['laisse', 'tomber']], replyData : ["AH"], replyOptions:{embed:denis}
     },{
         triggers:[['shut', 'up'], ['ta', 'gueule']], replyData : [":cry: "]
     }]
@@ -99,7 +99,7 @@ if (config.has('debug_console') && config.get('debug_console') == true) {
     bot.on('ready', function (){
         console.log("Je suis connecté !");
         generalChannel = bot.channels.find(c => c.name == 'general');
-        if (generalChannel) generalChannel.send('Je me suis reboot')
+        //if (generalChannel) generalChannel.send('Je me suis reboot')
     })
 
     bot.on('guildMemberAdd', member => {
