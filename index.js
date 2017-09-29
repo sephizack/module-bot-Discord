@@ -94,6 +94,20 @@ if (config.has('debug_console') && config.get('debug_console') == true) {
     });
     rl.on('close', function() {process.exit();})
 } else {
+    function connectToDiscord(client, token, nb_retries) {
+        console.log("Trying to login to Discord...")
+        var loginPromise = client.login(token);
+        loginPromise.catch(error => {
+            if (nb_retries <= 0) {
+                console.log("Login failed too many times, abort.")
+                process.exit()
+            } else {
+                console.log('An error has occured. Retrying in 1 minute.')
+                setTimeout(function () {connectToDiscord(client, token, nb_retries-1)}, 1000*60);
+            }
+        });
+    }
+
     // Start the actual BOT conected to Discord
     var generalChannel = null;
     bot.on('ready', function (){
@@ -114,7 +128,7 @@ if (config.has('debug_console') && config.get('debug_console') == true) {
     });
 
     if(config.has('token_bot') && config.get('token_bot') !== ""){
-        bot.login(config.get('token_bot'));
+        connectToDiscord(bot, config.get('token_bot'), 20);
     } else {
         console.error('You need to create config folder with default.json file containing the login token of your bot in variable token_bot. See exemple_default.json')
     }

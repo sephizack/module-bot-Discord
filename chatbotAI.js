@@ -20,7 +20,7 @@ function setUserBranch(author, tree) {
 	_users_branch[author] = tree;
 	// Delete user node after 2 minutes without reply
 	setTimeout(function() {
-		delete _users_branch[author];
+		if (_users_branch[author]) delete _users_branch[author];
 	}, 1000*60*2);
 }
 
@@ -29,7 +29,7 @@ function getUserBranch(author){
 }
 
 function deleteUserBranch(author){
-	delete _users_branch[author];
+	if (_users_branch[author]) delete _users_branch[author];
 }
 
 function randomReply(message, replies, options) {
