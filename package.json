@@ -15,12 +15,15 @@
     "opusscript": "^0.0.3",
     "sodium": "^2.0.1",
     "uws": "^0.14.5",
-    "config": "^1.26.2"
+    "config": "^1.26.2",
+    "request": "^2.83.0",
+    "node-persist": "^2.1.0",
+    "plex-api": "5.2.0"
   },
   "devDependencies": {},
   "scripts": {
-    "start": "export NODE_ENV=production && node index.js",
-    "debug": "export NODE_ENV=development && node index.js",
+    "start": "export NODE_ENV=production && export NODE_NO_HTTP2=1 && node index.js",
+    "debug": "export NODE_ENV=development && export NODE_NO_HTTP2=1 && node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "moi",

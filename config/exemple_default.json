@@ -1,3 +1,4 @@
 {
-	"token_bot" : "YOUR_TOKEN"
+	"token_bot" : "YOUR_TOKEN",
+	"decision_tree_module": "ff14tree.js"
 }

@@ -32,8 +32,9 @@ function deleteUserBranch(author){
 	if (_users_branch[author]) delete _users_branch[author];
 }
 
-function randomReply(message, replies, options) {
-	message.reply(replies[Math.floor(Math.random()*replies.length)], options)
+function randomReply(message, replies, options, replyAction) {
+	if (replies) message.reply(replies[Math.floor(Math.random()*replies.length)], options)
+	if (replyAction) replyAction(message);
 }
 
 function getNextUserTree(branch) {
@@ -70,7 +71,7 @@ function processMessage(message) {
 }
 
 function endWithBranch(message, branch) {
-	randomReply(message, branch.replyData, branch.replyOptions);
+	randomReply(message, branch.replyData, branch.replyOptions, branch.replyAction);
 	if (branch.stopDiscussionOnMatch) deleteUserBranch(message.author);
 	else setUserBranch(message.author, branch);
 }
