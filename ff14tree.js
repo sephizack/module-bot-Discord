@@ -73,7 +73,7 @@ TreeConfig.prototype.start = function(iDiscordClient, channels) {
 }
 TreeConfig.prototype.onGuildMemberAdd = function(member) {
 	if(generalChannel){
-        generalChannel.send('Bienvenue sur le discord des "The Allagans", ' + member.displayName)
+        generalChannel.send('Bienvenue sur le discord des The Allagans, ' + member.displayName)
     }
 }
 

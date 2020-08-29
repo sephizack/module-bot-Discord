@@ -1,4 +1,4 @@
-config/default.json
+config/local.json
 node_modules
 .floo
 .flooignore
